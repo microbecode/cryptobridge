@@ -12,11 +12,11 @@ namespace Bridge
         static void Main(string[] args)
         {
             var s = new Something();
-            s.Do().GetAwaiter().GetResult();
+            s.TestStuff().GetAwaiter().GetResult();
         }
     }
     public class Something { 
-        public async Task Do()
+        public async Task TestStuff()
         {
             var url = "http://127.0.0.1:8545"; // "http://testchain.nethereum.com:8545";
             var privateKey = "0x074ad2942c838d174010191fe2becf0c5ece070381f7775cb102128814c787aa";
@@ -32,13 +32,13 @@ namespace Bridge
             //var transactionReceipt = await deploymentHandler.SendRequestAndWaitForReceiptAsync(deploymentMessage);
             var contractAddress = "0x1cb94c5c6486032a3cc4b92f97c9f8a3882405f2";// transactionReceipt.ContractAddress;
 
-            var balanceOfFunctionMessage = new BalanceOfFunction()
-            {
-                Owner = account.Address,
-            };
+            //var balanceOfFunctionMessage = new BalanceOfFunction()
+            //{
+            //    Owner = account.Address,
+            //};
 
-            var balanceHandler = web3.Eth.GetContractQueryHandler<BalanceOfFunction>();
-            var balance = await balanceHandler.QueryAsync<BigInteger>(contractAddress, balanceOfFunctionMessage);
+            //var balanceHandler = web3.Eth.GetContractQueryHandler<BalanceOfFunction>();
+            //var balance = await balanceHandler.QueryAsync<BigInteger>(contractAddress, balanceOfFunctionMessage);
 
 
             var receiverAddress = "0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe";
