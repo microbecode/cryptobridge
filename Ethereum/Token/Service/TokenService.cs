@@ -10,33 +10,33 @@ using Nethereum.Contracts.CQS;
 using Nethereum.Contracts.ContractHandlers;
 using Nethereum.Contracts;
 using System.Threading;
-using Ethereum.Contracts.ERC20.ContractDefinition;
+using Ethereum.Contracts.Token.ContractDefinition;
 
-namespace Ethereum.Contracts.ERC20.Service
+namespace Ethereum.Contracts.Token.Service
 {
-    public partial class ERC20Service
+    public partial class TokenService
     {
-        public static Task<TransactionReceipt> DeployContractAndWaitForReceiptAsync(Nethereum.Web3.Web3 web3, ERC20Deployment eRC20Deployment, CancellationTokenSource cancellationTokenSource = null)
+        public static Task<TransactionReceipt> DeployContractAndWaitForReceiptAsync(Nethereum.Web3.Web3 web3, TokenDeployment tokenDeployment, CancellationTokenSource cancellationTokenSource = null)
         {
-            return web3.Eth.GetContractDeploymentHandler<ERC20Deployment>().SendRequestAndWaitForReceiptAsync(eRC20Deployment, cancellationTokenSource);
+            return web3.Eth.GetContractDeploymentHandler<TokenDeployment>().SendRequestAndWaitForReceiptAsync(tokenDeployment, cancellationTokenSource);
         }
 
-        public static Task<string> DeployContractAsync(Nethereum.Web3.Web3 web3, ERC20Deployment eRC20Deployment)
+        public static Task<string> DeployContractAsync(Nethereum.Web3.Web3 web3, TokenDeployment tokenDeployment)
         {
-            return web3.Eth.GetContractDeploymentHandler<ERC20Deployment>().SendRequestAsync(eRC20Deployment);
+            return web3.Eth.GetContractDeploymentHandler<TokenDeployment>().SendRequestAsync(tokenDeployment);
         }
 
-        public static async Task<ERC20Service> DeployContractAndGetServiceAsync(Nethereum.Web3.Web3 web3, ERC20Deployment eRC20Deployment, CancellationTokenSource cancellationTokenSource = null)
+        public static async Task<TokenService> DeployContractAndGetServiceAsync(Nethereum.Web3.Web3 web3, TokenDeployment tokenDeployment, CancellationTokenSource cancellationTokenSource = null)
         {
-            var receipt = await DeployContractAndWaitForReceiptAsync(web3, eRC20Deployment, cancellationTokenSource);
-            return new ERC20Service(web3, receipt.ContractAddress);
+            var receipt = await DeployContractAndWaitForReceiptAsync(web3, tokenDeployment, cancellationTokenSource);
+            return new TokenService(web3, receipt.ContractAddress);
         }
 
         protected Nethereum.Web3.Web3 Web3{ get; }
 
         public ContractHandler ContractHandler { get; }
 
-        public ERC20Service(Nethereum.Web3.Web3 web3, string contractAddress)
+        public TokenService(Nethereum.Web3.Web3 web3, string contractAddress)
         {
             Web3 = web3;
             ContractHandler = web3.Eth.GetContractHandler(contractAddress);

@@ -11,6 +11,7 @@
     <PackageReference Include="Nethereum.Web3" Version="3.8.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Ethereum\Ethereum.Contracts.csproj" />
     <ProjectReference Include="..\Bridge\Bridge.csproj" />
   </ItemGroup>
   <ItemGroup>

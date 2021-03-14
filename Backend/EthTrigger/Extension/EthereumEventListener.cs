@@ -1,4 +1,5 @@
-﻿using Microsoft.Azure.WebJobs.Host.Executors;
+﻿using Ethereum.Contracts.Token.ContractDefinition;
+using Microsoft.Azure.WebJobs.Host.Executors;
 using Microsoft.Azure.WebJobs.Host.Listeners;
 using Nethereum.ABI.FunctionEncoding;
 using Nethereum.Contracts;
@@ -41,13 +42,7 @@ namespace EthTrigger.Extension
         {
             _cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
 
-            var web3 = new Web3(_attribute.Url);
-            var contract = web3.Eth.GetContract(_attribute.Abi, _attribute.ContractAddress);
-
-            _event = contract.GetEvent(_attribute.EventName);
-            _filter = await _event.CreateFilterAsync();
-
-            ListenAsync(_cts.Token);
+            await ListenAsync(_cts.Token);
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
@@ -57,37 +52,31 @@ namespace EthTrigger.Extension
             return Task.CompletedTask;
         }
 
-        private async void ListenAsync(CancellationToken cancellationToken)
+        private async Task ListenAsync(CancellationToken cancellationToken)
         {
+            var web3 = new Web3(_attribute.Url);
+            var transferEventHandler = web3.Eth.GetEvent<TransferEventDTO>(_attribute.ContractAddress); 
+            var filterTransferEventsForContractAllReceiverAddress2 = transferEventHandler.CreateFilterInput();
+            var filterIdTransferEventsForContractAllReceiverAddress2 = await transferEventHandler.CreateFilterAsync(filterTransferEventsForContractAllReceiverAddress2);
+
             await Task.Run(async () =>
             {
                 while (!cancellationToken.IsCancellationRequested)
                 {
-                    var eventsData = await _event.GetFilterChangeDefault(_filter);
+                    var result = await transferEventHandler.GetFilterChanges(filterIdTransferEventsForContractAllReceiverAddress2);
 
-                    ProcessEvents(eventsData, cancellationToken);
+                    ProcessEvents(result, cancellationToken);
                     await Task.Delay(EventPollingDelay);
                 }
             });
         }
 
-        private void ProcessEvents(List<EventLog<List<ParameterOutput>>> eventsData, CancellationToken cancellationToken)
+        private void ProcessEvents(List<EventLog<TransferEventDTO>> eventsData, CancellationToken cancellationToken)
         {
             eventsData
-                .Select(eventData => ExtractEventData(eventData.Event, eventData.Log))
+                .Select(eventData => new TransferLogData() { Log = eventData.Log, Transfer = eventData.Event })
                 .ToList()
                 .ForEach(ethereumEventData => _executor.TryExecuteAsync(new TriggeredFunctionData { TriggerValue = ethereumEventData }, cancellationToken));
-        }
-
-        private EthereumEventData ExtractEventData(List<ParameterOutput> eventParams, FilterLog log)
-        {
-            Dictionary<string, string> values = eventParams.ToDictionary(eventParam => eventParam.Parameter.Name, eventParam => eventParam.Result.ToString());
-            
-            return new EthereumEventData
-            {
-                Values = values,
-                BlockNumber = log.BlockNumber
-            };
         }
     }
 }

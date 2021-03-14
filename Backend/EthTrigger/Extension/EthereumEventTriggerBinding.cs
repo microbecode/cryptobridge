@@ -18,7 +18,7 @@ namespace EthTrigger.Extension
             _attribute = attribute;
         }
 
-        public Type TriggerValueType => typeof(EthereumEventData);
+        public Type TriggerValueType => typeof(TransferLogData);
 
         public IReadOnlyDictionary<string, Type> BindingDataContract => new Dictionary<string, Type>();
 

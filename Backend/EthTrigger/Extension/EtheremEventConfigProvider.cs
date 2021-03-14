@@ -13,7 +13,7 @@ namespace EthTrigger.Extension
         {
             context
                 .AddBindingRule<EthereumEventTriggerAttribute>()
-                .BindToTrigger<EthereumEventData>(new EthereumEventTriggerBindingProvider());
+                .BindToTrigger<TransferLogData>(new EthereumEventTriggerBindingProvider());
         }
     }
 }

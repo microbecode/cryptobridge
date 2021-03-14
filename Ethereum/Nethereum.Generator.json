@@ -7,9 +7,9 @@
             "CodeGenLanguage":"CSharp"
         },
         {
-            "ContractName":"ERC20",
-            "ABIFile":"bin/contracts/token/ERC20/ERC20.abi",
-            "BinFile":"bin/contracts/token/ERC20/ERC20.bin",
+            "ContractName":"Token",
+            "ABIFile":"bin/contracts/Token.abi",
+            "BinFile":"bin/contracts/Token.bin",
             "CodeGenLanguage":"CSharp"
         }
     ]
