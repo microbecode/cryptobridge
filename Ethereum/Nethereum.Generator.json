@@ -1,0 +1,14 @@
+{
+    "ABIConfigurations": [
+    {
+        "ContractName":"Deposit",
+        "ABIFile":"bin/contracts/Deposit.abi",
+        "BinFile":"bin/contracts/Deposit.bin",
+        "BaseNamespace":null,
+        "CQSNamespace":null,
+        "DTONamespace":null,
+        "ServiceNamespace":null,
+        "CodeGenLanguage":"CSharp",
+        "BaseOutputPath":null}
+    ]
+}

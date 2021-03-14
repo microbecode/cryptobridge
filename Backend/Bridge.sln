@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31025.194
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bridge", "Bridge\Bridge.csproj", "{5662A0A9-E770-4959-8635-99C7A872CE01}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bridge", "Bridge\Bridge.csproj", "{5662A0A9-E770-4959-8635-99C7A872CE01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EthTrigger", "EthTrigger\EthTrigger.csproj", "{37222FDE-9722-4B54-B7F4-C1050C1A6FD2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EthTrigger", "EthTrigger\EthTrigger.csproj", "{37222FDE-9722-4B54-B7F4-C1050C1A6FD2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ethereum.Contracts", "..\Ethereum\Ethereum.Contracts.csproj", "{A984E043-ABA9-4B80-9848-9426F2FD25A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{37222FDE-9722-4B54-B7F4-C1050C1A6FD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{37222FDE-9722-4B54-B7F4-C1050C1A6FD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{37222FDE-9722-4B54-B7F4-C1050C1A6FD2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A984E043-ABA9-4B80-9848-9426F2FD25A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A984E043-ABA9-4B80-9848-9426F2FD25A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A984E043-ABA9-4B80-9848-9426F2FD25A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A984E043-ABA9-4B80-9848-9426F2FD25A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
