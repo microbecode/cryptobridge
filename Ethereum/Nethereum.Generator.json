@@ -1,14 +1,16 @@
 {
     "ABIConfigurations": [
-    {
-        "ContractName":"Deposit",
-        "ABIFile":"bin/contracts/Deposit.abi",
-        "BinFile":"bin/contracts/Deposit.bin",
-        "BaseNamespace":null,
-        "CQSNamespace":null,
-        "DTONamespace":null,
-        "ServiceNamespace":null,
-        "CodeGenLanguage":"CSharp",
-        "BaseOutputPath":null}
+        {
+            "ContractName":"Deposit",
+            "ABIFile":"bin/contracts/Deposit.abi",
+            "BinFile":"bin/contracts/Deposit.bin",
+            "CodeGenLanguage":"CSharp"
+        },
+        {
+            "ContractName":"ERC20",
+            "ABIFile":"bin/contracts/token/ERC20/ERC20.abi",
+            "BinFile":"bin/contracts/token/ERC20/ERC20.bin",
+            "CodeGenLanguage":"CSharp"
+        }
     ]
 }

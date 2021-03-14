@@ -1,4 +1,4 @@
-﻿using Bridge.Contracts;
+using NUnit.Framework;
 using Ethereum.Contracts.Deposit.ContractDefinition;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
@@ -6,21 +6,25 @@ using System;
 using System.Numerics;
 using System.Threading.Tasks;
 
-namespace Bridge
+namespace Tests
 {
-    class Program
+    public class Tests
     {
-        static void Main(string[] args)
+        private string url = "http://127.0.0.1:8545";
+        private string privateKey = "0x8f74caf4d4e74ee73e960fcb6f77f8a7ee80070507ffa99123559faf7066322e";
+
+        [SetUp]
+        public void Setup()
         {
-            var s = new Something();
-            s.TestStuff().GetAwaiter().GetResult();
         }
-    }
-    public class Something { 
-        public async Task TestStuff()
+
+        [Test]
+        public async Task Test1()
         {
-            var url = "http://127.0.0.1:8545"; // "http://testchain.nethereum.com:8545";
-            var privateKey = "0x8f74caf4d4e74ee73e960fcb6f77f8a7ee80070507ffa99123559faf7066322e";
+            await AddDepositContract();
+        }
+
+        private async Task AddDepositContract() {
             var account = new Account(privateKey);
             var web3 = new Web3(account, url);
 
@@ -42,14 +46,14 @@ namespace Bridge
             //var balance = await balanceHandler.QueryAsync<BigInteger>(contractAddress, balanceOfFunctionMessage);
 
 
-            var receiverAddress = "0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe";
-            var transferHandler = web3.Eth.GetContractTransactionHandler<TransferFunction>();
-            var transfer = new TransferFunction()
-            {
-                To = receiverAddress,
-                TokenAmount = 100
-            };
-            var tr = await transferHandler.SendRequestAndWaitForReceiptAsync(contractAddress, transfer);
+            //var receiverAddress = "0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe";
+            //var transferHandler = web3.Eth.GetContractTransactionHandler<TransferFunction>();
+            //var transfer = new TransferFunction()
+            //{
+            //    To = receiverAddress,
+            //    TokenAmount = 100
+            //};
+            //var tr = await transferHandler.SendRequestAndWaitForReceiptAsync(contractAddress, transfer);
 
 
             Console.WriteLine();

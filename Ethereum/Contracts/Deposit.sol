@@ -1,6 +1,6 @@
 pragma solidity ^0.5.17;
 
-import "./IERC20.sol";
+import "./token/ERC20/IERC20.sol";
 
 contract Deposit {
     address public token;
